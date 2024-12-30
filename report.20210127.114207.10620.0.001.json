@@ -1,0 +1,357 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20210127.114207.10620.0.001.json",
+    "dumpEventTime": "2021-01-27T11:42:07Z",
+    "dumpEventTimeStamp": "1611718927224",
+    "processId": 10620,
+    "cwd": "C:\\xampp\\htdocs\\ais-project",
+    "commandLine": [
+      "node",
+      "C:\\Users\\Lenovo\\AppData\\Roaming\\npm\\node_modules\\pm2\\lib\\ProcessContainerFork.js"
+    ],
+    "nodejsVersion": "v12.13.1",
+    "wordSize": 32,
+    "arch": "ia32",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.13.1",
+      "v8": "7.7.299.13-node.16",
+      "uv": "1.33.1",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.39.2",
+      "napi": "5",
+      "llhttp": "1.1.4",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.13.1/node-v12.13.1-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.13.1/node-v12.13.1.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.13.1/win-x86/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.18363",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "i686",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz",
+        "speed": 2494,
+        "user": 2694265,
+        "nice": 0,
+        "sys": 3150578,
+        "idle": 24821531,
+        "irq": 147390
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz",
+        "speed": 2494,
+        "user": 3234265,
+        "nice": 0,
+        "sys": 3604109,
+        "idle": 23827750,
+        "irq": 43828
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz",
+        "speed": 2494,
+        "user": 3140093,
+        "nice": 0,
+        "sys": 3650234,
+        "idle": 23875796,
+        "irq": 33296
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz",
+        "speed": 2494,
+        "user": 3132359,
+        "nice": 0,
+        "sys": 3005656,
+        "idle": 24528125,
+        "irq": 21500
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "Wi-Fi",
+        "internal": false,
+        "mac": "10:0b:a9:a9:6e:c4",
+        "address": "fe80::d099:637d:126e:d347",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 8
+      },
+      {
+        "name": "Wi-Fi",
+        "internal": false,
+        "mac": "10:0b:a9:a9:6e:c4",
+        "address": "192.168.101.114",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "DESKTOP-U39VL8I"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x01fd4468",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 15257600,
+    "totalCommittedMemory": 15257600,
+    "usedMemory": 13911472,
+    "availableMemory": 844465032,
+    "memoryLimit": 857735168,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 262008,
+        "used": 22100,
+        "available": 239908
+      },
+      "new_space": {
+        "memorySize": 1048576,
+        "committedMemory": 1048576,
+        "capacity": 1048032,
+        "used": 1048024,
+        "available": 8
+      },
+      "old_space": {
+        "memorySize": 10555392,
+        "committedMemory": 10555392,
+        "capacity": 10410216,
+        "used": 10016476,
+        "available": 393740
+      },
+      "code_space": {
+        "memorySize": 688128,
+        "committedMemory": 688128,
+        "capacity": 489216,
+        "used": 472928,
+        "available": 16288
+      },
+      "map_space": {
+        "memorySize": 790528,
+        "committedMemory": 790528,
+        "capacity": 789928,
+        "used": 500440,
+        "available": 289488
+      },
+      "large_object_space": {
+        "memorySize": 1863680,
+        "committedMemory": 1863680,
+        "capacity": 1849488,
+        "used": 1849488,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 2016,
+        "used": 2016,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 1048032,
+        "used": 0,
+        "available": 1048032
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 7.359,
+    "kernelCpuSeconds": 1.75,
+    "cpuConsumptionPercent": 0.506618,
+    "maxRss": 50032640,
+    "pageFaults": {
+      "IORequired": 123160,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 746,
+      "writes": 2010
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "aisProject": "{}",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\Lenovo\\AppData\\Roaming",
+    "automation": "true",
+    "autorestart": "true",
+    "axm_actions": "",
+    "axm_dynamic": "[object Object]",
+    "axm_monitor": "[object Object]",
+    "axm_options": "[object Object]",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "DESKTOP-U39VL8I",
+    "ComSpec": "C:\\Windows\\system32\\cmd.exe",
+    "created_at": "1611717128442",
+    "dp0": "C:\\Users\\Lenovo\\AppData\\Roaming\\npm\\",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "env": "[object Object]",
+    "env_production": "[object Object]",
+    "exec_interpreter": "node",
+    "exec_mode": "fork_mode",
+    "exit_code": "1",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "GOOGLE_API_KEY": "no",
+    "GOOGLE_DEFAULT_CLIENT_ID": "no",
+    "GOOGLE_DEFAULT_CLIENT_SECRET": "no",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\Lenovo",
+    "instances": "1",
+    "instance_var": "NODE_APP_INSTANCE",
+    "kill_retry_time": "100",
+    "km_link": "false",
+    "LOCALAPPDATA": "C:\\Users\\Lenovo\\AppData\\Local",
+    "LOGONSERVER": "\\\\DESKTOP-U39VL8I",
+    "merge_logs": "true",
+    "name": "aisProject",
+    "namespace": "default",
+    "NODE_APP_INSTANCE": "0",
+    "node_args": "",
+    "NODE_ENV": "development",
+    "node_version": "12.13.1",
+    "NUMBER_OF_PROCESSORS": "4",
+    "OneDrive": "C:\\Users\\Lenovo\\OneDrive",
+    "OS": "Windows_NT",
+    "Path": "C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\Intel\\OpenCL SDK\\2.0\\bin\\x86;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\PuTTY\\;C:\\Users\\Lenovo\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Lenovo\\AppData\\Roaming\\npm",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC",
+    "PM2_HOME": "C:\\Users\\Lenovo\\.pm2",
+    "PM2_INTERACTOR_PROCESSING": "true",
+    "PM2_JSON_PROCESSING": "true",
+    "PM2_USAGE": "CLI",
+    "pmx": "true",
+    "pm_cwd": "C:\\xampp\\htdocs\\ais-project",
+    "pm_err_log_path": "C:\\Users\\Lenovo\\.pm2\\logs\\aisProject-error.log",
+    "pm_exec_path": "C:\\xampp\\htdocs\\ais-project\\api\\index.js",
+    "pm_id": "0",
+    "pm_out_log_path": "C:\\Users\\Lenovo\\.pm2\\logs\\aisProject-out.log",
+    "pm_pid_path": "C:\\Users\\Lenovo\\.pm2\\pids\\aisProject-0.pid",
+    "pm_uptime": "1611717128876",
+    "prev_restart_delay": "0",
+    "PROCESSOR_ARCHITECTURE": "x86",
+    "PROCESSOR_IDENTIFIER": "x86 Family 6 Model 42 Stepping 7, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "2a07",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "restart_time": "57",
+    "SESSIONNAME": "Console",
+    "status": "launching",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\Windows",
+    "TEMP": "C:\\Users\\Lenovo\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\Lenovo\\AppData\\Local\\Temp",
+    "treekill": "true",
+    "unique_id": "4b233977-83dc-49e6-84c9-587315ce160f",
+    "unstable_restarts": "0",
+    "USERDOMAIN": "DESKTOP-U39VL8I",
+    "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-U39VL8I",
+    "USERNAME": "Lenovo",
+    "username": "Lenovo",
+    "USERPROFILE": "C:\\Users\\Lenovo",
+    "version": "1.0.0",
+    "versioning": "null",
+    "vizion": "true",
+    "vizion_running": "false",
+    "watch": "true",
+    "windir": "C:\\Windows",
+    "windowsHide": "true",
+    "_prog": "node"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Program Files\\AVAST Software\\Avast\\aswhook.dll",
+    "C:\\Windows\\System32\\KERNEL32.DLL",
+    "C:\\Windows\\System32\\KERNELBASE.dll",
+    "C:\\Windows\\System32\\WS2_32.dll",
+    "C:\\Windows\\System32\\RPCRT4.dll",
+    "C:\\Windows\\System32\\ADVAPI32.dll",
+    "C:\\Windows\\System32\\msvcrt.dll",
+    "C:\\Windows\\System32\\sechost.dll",
+    "C:\\Windows\\System32\\USER32.dll",
+    "C:\\Windows\\System32\\win32u.dll",
+    "C:\\Windows\\System32\\GDI32.dll",
+    "C:\\Windows\\System32\\gdi32full.dll",
+    "C:\\Windows\\System32\\msvcp_win.dll",
+    "C:\\Windows\\System32\\ucrtbase.dll",
+    "C:\\Windows\\System32\\PSAPI.DLL",
+    "C:\\Windows\\System32\\CRYPT32.dll",
+    "C:\\Windows\\System32\\MSASN1.dll",
+    "C:\\Windows\\System32\\bcrypt.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\Windows\\SYSTEM32\\USERENV.dll",
+    "C:\\Windows\\System32\\profapi.dll",
+    "C:\\Windows\\SYSTEM32\\WINMM.dll",
+    "C:\\Windows\\SYSTEM32\\WINMMBASE.dll",
+    "C:\\Windows\\System32\\cfgmgr32.dll",
+    "C:\\Windows\\System32\\bcryptPrimitives.dll",
+    "C:\\Windows\\System32\\IMM32.DLL",
+    "C:\\Windows\\System32\\powrprof.dll",
+    "C:\\Windows\\System32\\UMPDC.dll",
+    "C:\\Windows\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\System32\\combase.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\System32\\kernel.appcore.dll",
+    "C:\\Windows\\System32\\NSI.dll",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\Windows\\SYSTEM32\\DNSAPI.dll",
+    "C:\\Windows\\system32\\napinsp.dll",
+    "C:\\Windows\\system32\\pnrpnsp.dll",
+    "C:\\Windows\\system32\\wshbth.dll",
+    "C:\\Windows\\system32\\NLAapi.dll",
+    "C:\\Windows\\System32\\winrnr.dll"
+  ]
+}

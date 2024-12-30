@@ -1,0 +1,25 @@
+#viewSummary {
+	font-family: "Calibri";
+	background-color: #ffffff !important;
+}
+#borderStyle {
+	border-width: 1px;
+	border-style: solid;
+	padding-left: 5px;
+}
+#hrStyle {
+	border-top:2px;
+	border-bottom: 2px;
+	border-left:0px;
+	border-right:0px;
+	color:#090909;
+	border-style: solid;
+}
+#hrStyleA {
+	border-top:0px;
+	border-bottom: 2px;
+	border-left:0px;
+	border-right:0px;
+	color:#090909;
+	border-style: solid;
+}

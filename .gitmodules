@@ -1,0 +1,4 @@
+[submodule "avasia-ibp"]
+	path = avasia-ibp
+	url = https://kath1996@bitbucket.org/kath1996/avasia-ibp.git
+	branch = webapps/checkvoucherparticular
