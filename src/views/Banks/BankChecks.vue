@@ -47,7 +47,7 @@
           v-model="filter"
           :clearable="false" readonly
           @input="reloadData()"
-          style="width: 230px;"></v-select>
+          style="width: 200px;"></v-select>
       </span>
       <span class="col-sm-2 pl-0">
         <base-input class="pt-2"
@@ -193,6 +193,14 @@
           :clearable="false"
           @input="getPaginatedBankChecks(1, '', listType)"></v-select>
       </span>
+    </div>
+    <hr class="mb-2 mt-2">
+    <!-- Export button -->
+    <div class="text-right pt-2">
+      <base-button id="darkBtn"
+        class="col-md-3 ml-2 mr-2"
+        v-if="bankChecks.length != 0"
+        v-on:click="exportBankChecks">Export</base-button>
     </div>
     <!-- UPDATE CHECKS MODAL -->
     <b-modal size="xl"
@@ -562,6 +570,7 @@
   import {db, dbUsers, dbMains} from '@/main';
   import {required, helpers} from "vuelidate/lib/validators";
   import {mapGetters} from "vuex";
+  import ExcelExport from 'export-xlsx';
 
   const tableColumns = ["#", "Check No.", "Amount", "Date", "Payee", "Bank", "Account No.", "Actions"];
   const particularColumns = ["#", "Particular", "Description", "Reference Number", "Amount", "Actions"];
@@ -627,6 +636,7 @@
         banks: [],
         activateBanks: [],
         bankAccounts: [],
+        departments: [],
         activateBankAccounts: [],
         particulars: [],
         currentPage: 1 ,
@@ -647,6 +657,7 @@
           {"filterId": "bankAccount", "filter": 'Bank Account'}
         ],
         filter: 'dateCreated',
+        dataType: 'Used',
         dateCreated: moment().format('YYYY-MM'),
         maxDate: moment().format('YYYY-MM'),
         listType: '',
@@ -678,7 +689,8 @@
           unitPrice: '',
           quantity: '',
           amount: ''
-        }
+        },
+        exportData: []
       };
     },
     validations: {
@@ -730,6 +742,7 @@
       this.getPaginatedBankChecks(1, "", "Used");
       this.getBanks();
       this.getBankAccounts();
+      this.getDepartments();
       this.getSuppliers();
       this.getUserRole();
     },
@@ -775,6 +788,221 @@
           });
         });
       },
+      // Export bank checks data
+      exportBankChecks() {
+        const excelExport = new ExcelExport();
+
+        let self = this, bankCheckData = null, ids = [], checks = [];
+        let start = moment(self.dateCreated).startOf('month').format('YYYY-MM-DD');
+        let end = moment(self.dateCreated).endOf('month').format('YYYY-MM-DD');
+        let listStatus = [], headerDefinitionA = [];
+        
+        if (self.dataType === 'Used') {
+          listStatus = [1, 3];
+        } else if(self.dataType === 'Cleared') {
+          listStatus = [2];
+        } else if(self.dataType === 'Cancelled') {
+          listStatus = [0];
+        } 
+
+        if(self.dataType === 'All') {
+          if(self.filter == 'dateCreated'){
+            let startDate = new Date(start);
+            let endDate = new Date(end);
+
+            bankCheckData = db.collection("bankChecks")
+              .where("dateCreated", ">=", startDate)
+              .where("dateCreated", "<=", endDate)
+              .orderBy("dateCreated","desc");
+          } else if(self.filter == 'checkDate'){
+            bankCheckData = db.collection("bankChecks")
+            .where("bankCheckDate", ">=", start)
+            .where("bankCheckDate", "<=", end)
+            .orderBy("bankCheckDate", "desc");
+          } else if(self.filter == 'bank'){
+            bankCheckData = db.collection("bankChecks")
+            .where("bankReference", "==", self.bank)
+            .orderBy("bankCheckDate", "desc");
+          } else if(self.filter == 'bankAccount'){
+            bankCheckData = db.collection("bankChecks")
+            .where("bankAccountReference", "==", self.bankAccount)
+            .orderBy("bankCheckDate", "desc");
+          }
+        } else if (listStatus.length > 0) {
+          if (self.filter == 'dateCreated'){
+            let startDate = new Date(start);
+            let endDate = new Date(end);
+
+            bankCheckData = db.collection("bankChecks")
+              .where("dateCreated", ">=", startDate)
+              .where("dateCreated", "<=", endDate)
+              .where("status","in", listStatus)
+              .orderBy("dateCreated","desc");
+          } else if(self.filter == 'checkDate'){
+            bankCheckData = db.collection("bankChecks")
+            .where("bankCheckDate", ">=", start)
+            .where("bankCheckDate", "<=", end)
+            .where("status", "in", listStatus)
+            .orderBy("bankCheckDate", "desc");
+          } else if(self.filter == 'bank'){
+            bankCheckData = db.collection("bankChecks")
+            .where("bankReference", "==", self.bank)
+            .where("status", "in", listStatus)
+            .orderBy("bankCheckDate", "desc");
+          } else if(self.filter == 'bankAccount'){
+            bankCheckData = db.collection("bankChecks")
+            .where("bankAccountReference", "==", self.bankAccount)
+            .where("status", "in", listStatus)
+            .orderBy("bankCheckDate", "desc");
+          }
+        }
+
+        headerDefinitionA = [
+          {
+            name: 'Number',
+            key: 'num',
+            width: 10
+          },
+          {
+            name: 'Check Number',
+            key: 'bankCheckNumber',
+            width: 50
+          },
+          {
+            name: 'Amount',
+            key: 'bankCheckAmount',
+            width: 50
+          },
+          {
+            name: 'Check Date',
+            key: 'bankCheckDate',
+            width: 50
+          },
+          {
+            name: 'Payee',
+            key: 'payee',
+            width: 50
+          },
+          {
+            name: 'Voucher Number',
+            key: 'voucherNumber',
+            width: 50
+          },
+          {
+            name: 'Voucher Date',
+            key: 'voucherDate',
+            width: 50
+          },
+          {
+            name: 'Bank',
+            key: 'bankName',
+            width: 50
+          },
+          {
+            name: 'Account Name',
+            key: 'accountName',
+            width: 50
+          },
+          {
+            name: 'Account Number',
+            key: 'accountNumber',
+            width: 50
+          },
+          {
+            name: 'Check Type',
+            key: 'checkType',
+            width: 50
+          },
+          {
+            name: 'Department',
+            key: 'department',
+            width: 50
+          },
+          {
+            name: 'Description',
+            key: 'description',
+            width: 50
+          },
+          {
+            name: 'Date Created',
+            key: 'dateCreated',
+            width: 50
+          },
+          {
+            name: 'Date Modified',
+            key: 'dateModified',
+            width: 50
+          },
+        ];
+
+        bankCheckData.get().then((querySnapshot) => {
+          if(!querySnapshot.empty){
+            querySnapshot.forEach((doc) => {
+              checks.push(doc.data());
+              ids.push(doc.id);
+            });
+            let supData = db.collection("suppliers");
+            let sups = [];
+
+            supData.get().then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                sups.push(doc.data());
+              })
+              for(let i = 0; i < checks.length; i++){
+                checks[i]["rowNum"] = 1 + i;
+                checks[i]["id"] = ids[i];
+                checks[i]["payee"] = '';
+                for(let a = 0; a < sups.length; a++){
+                  if(checks[i].payeeReference == sups[a].supplierId){
+                    checks[i].payee = sups[a].supplier;
+                  }
+                }
+                const checkBank = self.banks.find((item) => item.bankUid === checks[i].bankReference);
+                const checkAccount = self.bankAccounts.find((item) => item.bankAccountUid === checks[i].bankAccountReference);
+                const department = self.departments.find((item) => item.departmentUid === checks[i].departmentReference);
+
+                checks[i].dateCreated = moment(moment.unix(checks[i].dateCreated.seconds)).format('YYYY-MM-DD');
+                checks[i].dateModified = moment(moment.unix(checks[i].dateModified.seconds)).format('YYYY-MM-DD');
+                checks[i].bankCheckDate = moment(checks[i].bankCheckDate).format('YYYY-MM-DD');
+                checks[i].voucherDate = moment(moment.unix(checks[i].voucherDate.seconds)).format('YYYY-MM-DD');
+                checks[i].bankCheckAmount = format(parseFloat(checks[i].bankCheckAmount).toFixed(2));
+                checks[i]["bankName"] = `${checkBank.bank} - ${checkBank.bankName}`;
+                checks[i]["accountName"] = checkAccount.bankAccountName;
+                checks[i]["accountNumber"] = checkAccount.bankAccountNumber;
+                checks[i]["department"] = department.departmentName;
+                checks[i]["num"] = i + 1;
+                self.exportData.push(checks[i]);
+              }
+            });
+          }
+          const SETTINGS_FOR_EXPORT = {
+            // Table settings
+            fileName: 'Bank Checks Data (' + moment().format("MMM DD, YYYY") + ')',
+            workSheets: [{
+              sheetName: 'Bank Checks',
+              startingRowNumber: 2,
+              gapBetweenTwoTables: 2,
+              tableSettings: {
+                dataA: {
+                  importable: true,
+                  tableTitle: 'Bank Checks',
+                  headerDefinition: headerDefinitionA,
+                }
+              },
+            }],
+          };
+          const data = [];
+
+          for(let d = 0; d < self.exportData.length; d++){
+            self.exportData[d]["num"] = d + 1;
+          }
+          console.log(self.exportData);
+          data.push({dataA : self.exportData});
+          excelExport.downloadExcel(SETTINGS_FOR_EXPORT, data);
+        });
+
+        
+      },
       // Display check data on table
       getPaginatedBankChecks(page, searchTerm, type) {
         let self = this, bankCheckData = null, ids = [], checks = [];
@@ -783,6 +1011,7 @@
 
         self.username = localStorage.getItem('aisname');
         self.accountName = self.username.toUpperCase();
+        self.dataType = type;
         let userAccount = dbUsers.collection("users")
           .where("username", "==", self.username);
         let accounts = [], accountId = '', user = '';
@@ -1404,6 +1633,20 @@
           self.bankAccount = self.bankAccounts[0].bankAccountUid;
         });
       },
+      // Get department data
+			getDepartments(){
+				let self = this;
+				let departmentData = dbUsers.collection("departments")
+					.orderBy("departmentName", "asc");
+
+				self.departments = [];
+				departmentData.get().then((querySnapshot) => {
+					querySnapshot.forEach((doc) => {
+						self.departments.push(doc.data());
+					});
+					self.newDepartment = self.departments[0].departmentUid;
+				});
+			},
       // Get check payee data
       getSuppliers(){
         let self = this;
